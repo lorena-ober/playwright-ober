@@ -1,16 +1,22 @@
-## Planned automated test cases (ParaBank)
+Test Cases
+1. Registration – Empty Form Submission
 
-1. Login - successful login with valid credentials  
-   Expected: Accounts Overview page is displayed and "Log Out" link is visible.
+Verify that appropriate validation error messages are displayed when the registration form is submitted without entering any required data.
 
-2. Login - invalid credentials show error  
-   Expected: Error message is displayed and user stays on login page.
+2. Registration – Password Confirmation Mismatch
 
-3. Logout - user can log out successfully  
-   Expected: User is redirected to the home/login page and "Log In" button is visible.
+Verify that the system displays an error message when the password and confirmation password fields contain different values during registration.
 
-4. Register - missing required fields validation  
-   Expected: Validation errors are shown for required fields.
+3. Login – Unsuccessful Authentication
 
-5. Navigation after login - Accounts Overview loads correctly  
-   Expected: Accounts table and heading "Accounts Overview" are visible and URL contains `overview.htm`.
+Verify that an error message is displayed when a user attempts to log in using invalid credentials.
+
+4. Login – Successful Authentication
+
+Verify that a user can successfully log in using valid credentials after completing the registration process.
+
+Confirm that successful authentication is indicated by the presence of the Log Out option.
+
+5. Logout – Successful User Logout
+
+Verify that a logged-in user can successfully log out and that the login form is displayed after the logout action.

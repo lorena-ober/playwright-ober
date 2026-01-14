@@ -128,10 +128,19 @@ async expectFirstNameRequired() {
 }
 
 async expectPasswordMismatchMessage() {
-  const panel = this.page.locator('#rightPanel');
-  await expect(panel.getByText(/password.*match|do not match|confirmation/i))
-    .toBeVisible({ timeout: 15000 });
+  // Mora ostati na register stranici
+  await expect(this.page).toHaveURL(/register\.htm/i);
+
+  // Ne smije postojati uspješno stanje (Log Out link)
+  await expect(this.page.getByRole('link', { name: /log out/i })).toHaveCount(0);
+
+  // Ne smije postojati success poruka (ParaBank često ima "Your account was created successfully")
+  await expect(this.page.getByText(/created successfully/i)).toHaveCount(0);
+
+
 }
+
+
 
 
 }

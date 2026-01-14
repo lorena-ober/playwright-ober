@@ -25,9 +25,13 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-   baseURL: process.env.BASE_URL, screenshot: 'only-on-failure', video: 'retain-on-failure', trace: 'on-first-retry', 
-  },
+ use: {
+  baseURL: process.env.BASE_URL || 'https://parabank.parasoft.com/parabank',
+  screenshot: 'only-on-failure',
+  video: 'retain-on-failure',
+  trace: 'on-first-retry',
+},
+
 
   /* Configure projects for major browsers */
   projects: [

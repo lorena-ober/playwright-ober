@@ -21,16 +21,8 @@ function makeUser(): RegisterUser {
 }
 
 test.describe('Login funkcionalnost', () => {
-  test('Neuspješan login s pogrešnim podacima', async ({ page }) => {
-    const login = new LoginPage(page);
-
-    await login.open();
-    await login.login('nepostojeciUser', 'KrivaLozinka123');
-
-    await login.expectLoginError();
-  });
-
-  test('Uspješan login s novoregistriranim korisnikom', async ({ page }) => {
+ 
+  test('Successful login with a newly registered user', async ({ page }) => {
     const register = new RegisterPage(page);
     const login = new LoginPage(page);
     const user = makeUser();

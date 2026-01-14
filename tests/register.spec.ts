@@ -30,7 +30,7 @@ test.describe('Register validations', () => {
     await register.expectRequiredFieldErrors(); // assertion
   });
 
-  test('register shows error when confirm password does not match', async ({ page }) => {
+  test('Registration displays an error when confirmation password does not match', async ({ page }) => {
     const register = new RegisterPage(page);
     const user = makeUserBase();
 

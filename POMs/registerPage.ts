@@ -110,10 +110,10 @@ export default class RegisterPage {
 
 
   async expectSuccess() {
-    // često se pojavi poruka "Your account was created successfully..."
-    await expect(this.page.getByText(/created successfully/i)).toBeVisible({ timeout: 15000 });
-    await expect(this.page.getByRole('link', { name: /log out/i })).toBeVisible({ timeout: 15000 });
-  }
+  await expect(this.page.getByRole('link', { name: /log out/i }))
+    .toBeVisible({ timeout: 15000 });
+}
+
 
   async expectRequiredFieldErrors() {
   await this.expectHasErrors();

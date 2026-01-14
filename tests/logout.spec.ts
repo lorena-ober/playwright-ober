@@ -20,7 +20,7 @@ function makeUser(): RegisterUser {
 }
 
 test.describe('Logout funkcionalnost', () => {
-  test('Uspješan logout korisnika', async ({ page }) => {
+  test('Successful user logout', async ({ page }) => {
     const register = new RegisterPage(page);
     const user = makeUser();
 

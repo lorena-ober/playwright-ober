@@ -1,22 +1,16 @@
 Test Cases
-1. Registration – Empty Form Submission
 
-Verify that appropriate validation error messages are displayed when the registration form is submitted without entering any required data.
+1. Successful login with a newly registered user: (/login.spec.ts)
+Verifies that a user who has just completed the registration process can successfully authenticate using valid credentials and access the application.
 
-2. Registration – Password Confirmation Mismatch
+2. Successful user logout: (/logout.spec.ts)
+Verifies that an authenticated user can successfully log out of the application and is redirected back to the login page.
 
-Verify that the system displays an error message when the password and confirmation password fields contain different values during registration.
+3. Register link opens the Register page:(/navigation.spec.ts)
+Verifies that selecting the Register navigation link redirects the user to the registration page and that the registration form is displayed correctly.
 
-3. Login – Unsuccessful Authentication
+4. Forgot login info link opens the Customer Lookup page:(/navigation.spec.ts)
+Verifies that selecting the Forgot login info? link redirects the user to the Customer Lookup page and that the appropriate page content is displayed.
 
-Verify that an error message is displayed when a user attempts to log in using invalid credentials.
-
-4. Login – Successful Authentication
-
-Verify that a user can successfully log in using valid credentials after completing the registration process.
-
-Confirm that successful authentication is indicated by the presence of the Log Out option.
-
-5. Logout – Successful User Logout
-
-Verify that a logged-in user can successfully log out and that the login form is displayed after the logout action.
+5. Registration displays an error when confirmation password does not match: (/register.spec.ts)
+Verifies that the registration process displays a validation error when the password and confirmation password fields contain different values.

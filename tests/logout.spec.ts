@@ -1,5 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import RegisterPage, { RegisterUser } from '../POMs/registerPage';
+import HomePage from '../POMs/homePage';
 
 function makeUser(): RegisterUser {
   const unique = `ober_${Date.now()}`;
@@ -22,19 +23,15 @@ function makeUser(): RegisterUser {
 test.describe('Logout funkcionalnost', () => {
   test('Successful user logout', async ({ page }) => {
     const register = new RegisterPage(page);
+    const homePage = new HomePage(page);
     const user = makeUser();
 
-    // 1) registracija (automatski login)
     await register.open();
     await register.register(user);
     await register.expectSuccess();
 
-    // 2) logout
-    await page.getByRole('link', { name: /log out/i }).click();
+    await homePage.logout();
 
-    // 3) assertion – login forma mora biti vidljiva
-    await expect(
-      page.locator('input[type="submit"][value="Log In"]')
-    ).toBeVisible({ timeout: 15000 });
+    await homePage.assertUserIsLoggedOut();
   });
 });

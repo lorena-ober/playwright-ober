@@ -18,7 +18,7 @@ export default class LoginPage {
 
   async open() {
     await this.page.goto('index.htm', { waitUntil: 'domcontentloaded' });
-    await expect(this.loginButton).toBeVisible({ timeout: 15000 });
+    await expect(this.loginButton).toBeVisible();
   }
 
   async clearSession() {
@@ -40,11 +40,10 @@ export default class LoginPage {
   }
 
   async expectSuccessfulLogin() {
-    await expect(this.logoutLink).toBeVisible({ timeout: 15000 });
+    await expect(this.logoutLink).toBeVisible();
   }
 
   async isLoggedIn(): Promise<boolean> {
-    // ne koristimo expect ovdje — samo provjera stanja
     return (await this.logoutLink.count()) > 0;
   }
 
@@ -52,11 +51,9 @@ export default class LoginPage {
   const logoutVisible = await this.logoutLink.count();
 
   if (logoutVisible > 0) {
-    // BUG u aplikaciji – login je prošao iako ne bi trebao
     console.warn('BUG: Login accepted invalid credentials');
     await expect(this.logoutLink).toBeVisible();
   } else {
-    // očekivano ponašanje – ostali smo na login / index stranici
     await expect(this.page).toHaveURL(/(index|login)\.htm/i);
   }
 }

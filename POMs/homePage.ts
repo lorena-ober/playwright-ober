@@ -43,8 +43,7 @@ export default class HomePage {
     await this.logoutLink.click();
   }
 
-  async expectLoggedOut() {
-    // nakon logout-a opet vidiš login button
+  async assertUserIsLoggedOut() {
     await expect(this.loginButton).toBeVisible();
     await expect(this.page).toHaveURL(/index\.htm/);
   }

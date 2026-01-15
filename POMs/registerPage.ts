@@ -36,7 +36,6 @@ export default class RegisterPage {
     this.page = page;
     this.panel = page.locator('#rightPanel');
 
-    // stabilno: prema name atributima iz sourcea
     this.firstName = page.locator('input[name="customer.firstName"]');
     this.lastName = page.locator('input[name="customer.lastName"]');
     this.address = page.locator('input[name="customer.address.street"]');
@@ -50,20 +49,17 @@ export default class RegisterPage {
     this.password = page.locator('input[name="customer.password"]');
     this.confirmPassword = page.locator('input[name="repeatedPassword"]');
 
-    // iz sourcea: input submit value="Register"
     this.registerButton = this.panel.locator('input[type="submit"][value="Register"]');
 
-    // ParaBank errori su često <span class="error">...</span>
     this.errorText = page.locator('.error');
   }
 
   async open() {
-    // bitno: bez leading slash, jer baseURL ima /parabank/
     await this.page.goto('register.htm', { waitUntil: 'domcontentloaded' });
 
-    await expect(this.panel).toBeVisible({ timeout: 15000 });
-    await expect(this.firstName).toBeVisible({ timeout: 15000 });
-    await expect(this.registerButton).toBeVisible({ timeout: 15000 });
+    await expect(this.panel).toBeVisible();
+    await expect(this.firstName).toBeVisible();
+    await expect(this.registerButton).toBeVisible();
   }
 
   async submitEmpty() {
@@ -105,15 +101,13 @@ export default class RegisterPage {
   }
 
  async expectHasErrors() {
-  await expect(this.errorText.first()).toBeVisible({ timeout: 15000 });
+  await expect(this.errorText.first()).toBeVisible();
 }
 
 
-  async expectSuccess() {
-  await expect(this.page.getByRole('link', { name: /log out/i }))
-    .toBeVisible({ timeout: 15000 });
+async expectSuccess() {
+  await expect(this.panel).toContainText(/success/i);
 }
-
 
   async expectRequiredFieldErrors() {
   await this.expectHasErrors();
@@ -124,17 +118,14 @@ async expectPasswordMismatchError() {
 }
 
 async expectFirstNameRequired() {
-  await expect(this.page.getByText('First name is required.')).toBeVisible({ timeout: 15000 });
+  await expect(this.page.getByText('First name is required.')).toBeVisible();
 }
 
 async expectPasswordMismatchMessage() {
-  // Mora ostati na register stranici
   await expect(this.page).toHaveURL(/register\.htm/i);
 
-  // Ne smije postojati uspješno stanje (Log Out link)
   await expect(this.page.getByRole('link', { name: /log out/i })).toHaveCount(0);
 
-  // Ne smije postojati success poruka (ParaBank često ima "Your account was created successfully")
   await expect(this.page.getByText(/created successfully/i)).toHaveCount(0);
 
 

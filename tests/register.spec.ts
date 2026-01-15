@@ -20,14 +20,13 @@ function makeUserBase(): RegisterUser {
 }
 
 test.describe('Register validations', () => {
-  console.log('BASE_URL =', process.env.BASE_URL);
   test('register shows validation errors when submitting empty form', async ({ page }) => {
     const register = new RegisterPage(page);
 
     await register.open();
     await register.submitEmpty();
 
-    await register.expectRequiredFieldErrors(); // assertion
+    await register.expectRequiredFieldErrors(); 
   });
 
   test('Registration displays an error when confirmation password does not match', async ({ page }) => {
